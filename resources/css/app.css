@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+@source '../views';
+@source '../js';
+
+/*
+ * Design tokens. Every colour and font in the app comes from here,
+ * so `bg-rice`, `text-ink`, `border-line`, `font-display` and so on
+ * are available as Tailwind classes.
+ */
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Gabarito', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --color-rice: #f6f5f1; /* page background */
+    --color-paper: #ffffff; /* cards and inputs */
+    --color-line: #e4e1da; /* borders and dividers */
+    --color-ink: #2a1a33; /* main text */
+    --color-plum: #66566f; /* secondary text */
+    --color-aubergine: #4a2a60; /* primary actions and links */
+    --color-aubergine-deep: #35213f; /* hover state of primary actions */
+    --color-aubergine-soft: #f1ebf5; /* tinted backgrounds */
+    --color-saffron: #f2b01e; /* highlights */
+    --color-saffron-soft: #fdf3d7;
+    --color-basil: #2a7148; /* success */
+    --color-basil-soft: #e3f1e8;
+    --color-chili: #b3301f; /* errors and destructive actions */
+    --color-chili-soft: #fbe9e6;
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-rice font-sans text-ink antialiased;
+    }
+
+    h1,
+    h2,
+    h3 {
+        @apply font-display;
+        text-wrap: balance;
+    }
+
+    /* One focus style for every interactive element. */
+    :focus-visible {
+        outline: 3px solid var(--color-saffron);
+        outline-offset: 2px;
+    }
+
+    /* The forms plugin adds its own blue ring; use the shared outline instead. */
+    input:focus,
+    select:focus,
+    textarea:focus {
+        --tw-ring-color: transparent;
+        border-color: var(--color-aubergine);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
+
+@layer components {
+    /* Long words and links typed by users must never widen the page. */
+    .user-text {
+        overflow-wrap: anywhere;
+        white-space: pre-line;
+    }
+
+    /* A link inside running text. */
+    .link {
+        @apply font-medium text-aubergine underline decoration-aubergine/30 underline-offset-4 hover:decoration-aubergine;
+    }
+}

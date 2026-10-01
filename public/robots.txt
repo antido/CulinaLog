@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /admin
+Disallow: /moderation
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /notifications
+Disallow: /search
+Disallow: /login
+Disallow: /register
